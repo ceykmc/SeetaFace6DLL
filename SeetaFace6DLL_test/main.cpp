@@ -27,6 +27,15 @@ int main()
     destroy_pose_quality_checker(p_pose_quality_checker);
     std::cout << "pose quality, level is: " << level << ", score is: " << score << std::endl;
 
+    float yaw = 0, pitch = 0, roll = 0;
+    const char* p_pose_estimate_model = \
+        "E:\\workspace\\cpp_projects\\work\\SeetaFace6DLL\\SeetaFace6DLL\\SeetaFaceSDK\\models\\pose_estimation.csta";
+    void* p_face_pose_estimator = create_face_pose_estimator(p_pose_estimate_model);
+    estimate_face_pose(p_face_pose_estimator, int(image.rows), int(image.cols), int(image.channels()),
+        image.data, face_rect, &yaw, &pitch, &roll);
+    destroy_face_pose_estimator(p_face_pose_estimator);
+    std::cout << "face angles, yaw: " << yaw << ", pitch: " << pitch << ", roll: " << roll << std::endl;
+
     system("pause");
     return 0;
 }
