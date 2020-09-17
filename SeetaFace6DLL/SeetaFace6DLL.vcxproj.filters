@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SeetaFace6.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="detect_faces.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -27,11 +24,14 @@
     <ClInclude Include="recognize_face.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="face_quality.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="estimate_face_pose.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SeetaFace6.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="detect_faces.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -39,6 +39,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="recognize_face.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="face_quality.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="estimate_face_pose.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

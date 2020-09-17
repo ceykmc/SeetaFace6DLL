@@ -126,16 +126,18 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="face_quality.h" />
     <ClInclude Include="detect_faces.h" />
     <ClInclude Include="detect_face_landmarks.h" />
     <ClInclude Include="recognize_face.h" />
-    <ClInclude Include="SeetaFace6.h" />
+    <ClInclude Include="estimate_face_pose.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="face_quality.cpp" />
     <ClCompile Include="detect_faces.cpp" />
     <ClCompile Include="detect_face_landmarks.cpp" />
     <ClCompile Include="recognize_face.cpp" />
-    <ClCompile Include="SeetaFace6.cpp" />
+    <ClCompile Include="estimate_face_pose.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
