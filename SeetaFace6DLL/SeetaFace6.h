@@ -6,10 +6,13 @@
 #define DLLEXPORT _declspec(dllimport)
 #endif
 
+#include <seeta/QualityOfPose.h>
+#include <seeta/QualityOfClarity.h>
+#include <seeta/PoseEstimator.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
     // clarity quality
     DLLEXPORT void* create_clarity_quality_checker();
 
@@ -47,11 +50,8 @@ extern "C" {
 
     DLLEXPORT void estimate_face_pose(
         void* p_face_pose_estimator,
-        int img_h,
-        int img_w,
-        int img_c,
-        unsigned char* img_data,
-        int face_rect[4],
+        const SeetaImageData& image,
+        const SeetaRect& face_rect,
         float* yaw,
         float* pitch,
         float* roll);

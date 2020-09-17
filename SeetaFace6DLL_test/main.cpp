@@ -1,10 +1,10 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "quality.h"
+#include "SeetaFace6.h"
 
 int main()
 {
-    const char* query_img_path = "C:\\Users\\xzy_lijun\\Desktop\\faces\\3\\126-1060-309-152-111_1_.png";
+    const char* query_img_path = ".\\data\\126-1060-309-152-111_1_.png";
     cv::Mat image = cv::imread(query_img_path);
     int face_rect[4] = { 0, 0, image.cols, image.rows };
     double face_landmarks[10] = { 
@@ -28,8 +28,7 @@ int main()
     std::cout << "pose quality, level is: " << level << ", score is: " << score << std::endl;
 
     float yaw = 0, pitch = 0, roll = 0;
-    const char* p_pose_estimate_model = \
-        "E:\\workspace\\cpp_projects\\work\\SeetaFace6DLL\\SeetaFace6DLL\\SeetaFaceSDK\\models\\pose_estimation.csta";
+    const char* p_pose_estimate_model = ".\\SeetaFaceSDK\\models\\pose_estimation.csta";
     void* p_face_pose_estimator = create_face_pose_estimator(p_pose_estimate_model);
     estimate_face_pose(p_face_pose_estimator, int(image.rows), int(image.cols), int(image.channels()),
         image.data, face_rect, &yaw, &pitch, &roll);

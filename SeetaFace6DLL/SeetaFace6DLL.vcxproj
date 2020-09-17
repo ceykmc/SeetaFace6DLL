@@ -119,14 +119,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>.\SeetaFaceSDK\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SeetaQualityAssessor300.lib;SeetaPoseEstimation600.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SeetaQualityAssessor300.lib;SeetaPoseEstimation600.lib;SeetaFaceDetector600.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="quality.h" />
+    <ClInclude Include="detect_faces.h" />
+    <ClInclude Include="SeetaFace6.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="quality.cpp" />
+    <ClCompile Include="detect_faces.cpp" />
+    <ClCompile Include="SeetaFace6.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

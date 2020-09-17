@@ -1,6 +1,8 @@
 import ctypes
 
 import cv2
+import SeetaFace_data_struct
+import convert
 
 
 def main():
@@ -85,26 +87,32 @@ def main():
     destroy_face_pose_estimator.argtypes = (ctypes.c_void_p, )
 
     estimate_face_pose = dll.estimate_face_pose
-    estimate_face_pose.argtypes = (ctypes.c_void_p, ctypes.c_int32,
-                                   ctypes.c_int32, ctypes.c_int32,
-                                   ctypes.POINTER(ctypes.c_uint8),
-                                   ctypes.c_int32 * 4,
-                                   ctypes.POINTER(ctypes.c_float),
-                                   ctypes.POINTER(ctypes.c_float),
-                                   ctypes.POINTER(ctypes.c_float))
+    estimate_face_pose.argtypes = (
+        ctypes.c_void_p,
+        SeetaFace_data_struct.SeetaImageData,
+        SeetaFace_data_struct.SeetaRect,
+        ctypes.POINTER(ctypes.c_float),
+        ctypes.POINTER(ctypes.c_float),
+        ctypes.POINTER(ctypes.c_float)
+    )
 
     yaw = ctypes.c_float(0)
     pitch = ctypes.c_float(0)
     roll = ctypes.c_float(0)
-    pose_model_file_path = (
-        R"E:\workspace\cpp_projects\work\SeetaFace6DLL"
-        R"\SeetaFace6DLL\SeetaFaceSDK\models\pose_estimation.csta").encode("utf-8")
+    pose_model_file_path = "./SeetaFaceSDK/models/pose_estimation.csta"
+    seeta_image = convert.convert_numpy_array_to_SeetaImageData(cv_image)
+    seeta_rect = SeetaFace_data_struct.SeetaRect(x=0, y=0, width=112, height=112)
+    pose_model_file_path = pose_model_file_path.encode("utf-8")
     face_pose_estimator = create_face_pose_estimator(
         ctypes.c_char_p(pose_model_file_path))
-    estimate_face_pose(face_pose_estimator, img_h, img_w, img_c,
-                       cv_image.ctypes.data_as(ctypes.POINTER(ctypes.c_uint8)),
-                       rect, ctypes.pointer(yaw), ctypes.pointer(pitch),
+    print("------ start ------")
+    estimate_face_pose(face_pose_estimator,
+                       seeta_image,
+                       seeta_rect,
+                       ctypes.pointer(yaw),
+                       ctypes.pointer(pitch),
                        ctypes.pointer(roll))
+    print("------ end ------")
     destroy_face_pose_estimator(face_pose_estimator)
     print(F"face angles, yaw: {yaw}, pitch: {pitch}, roll: {roll}")
 

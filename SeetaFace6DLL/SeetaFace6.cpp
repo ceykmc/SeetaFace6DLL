@@ -1,7 +1,4 @@
-#include "quality.h"
-#include <seeta/QualityOfPose.h>
-#include <seeta/QualityOfClarity.h>
-#include <seeta/PoseEstimator.h>
+#include "SeetaFace6.h"
 
 void* create_clarity_quality_checker()
 {
@@ -92,18 +89,30 @@ void destroy_face_pose_estimator(void* p_face_pose_estimator)
     }
 }
 
+//void estimate_face_pose(
+//    void* p_face_pose_estimator,
+//    int img_h,
+//    int img_w,
+//    int img_c,
+//    unsigned char* img_data,
+//    int face_rect[4],
+//    float* yaw,
+//    float* pitch,
+//    float* roll)
+//{
+//    SeetaImageData seeta_image = { img_w, img_h, img_c, img_data };
+//    SeetaRect seeta_rect = { face_rect[0], face_rect[1], face_rect[2], face_rect[3] };
+//    ((seeta::PoseEstimator*)p_face_pose_estimator)->Estimate(seeta_image, seeta_rect, yaw, pitch, roll);
+//}
+
 void estimate_face_pose(
     void* p_face_pose_estimator,
-    int img_h,
-    int img_w,
-    int img_c,
-    unsigned char* img_data,
-    int face_rect[4],
+    const SeetaImageData& image,
+    const SeetaRect& face_rect,
     float* yaw,
     float* pitch,
     float* roll)
 {
-    SeetaImageData seeta_image = { img_w, img_h, img_c, img_data };
-    SeetaRect seeta_rect = { face_rect[0], face_rect[1], face_rect[2], face_rect[3] };
-    ((seeta::PoseEstimator*)p_face_pose_estimator)->Estimate(seeta_image, seeta_rect, yaw, pitch, roll);
+    ((seeta::PoseEstimator*)p_face_pose_estimator)->Estimate(
+        image, face_rect, yaw, pitch, roll);
 }
