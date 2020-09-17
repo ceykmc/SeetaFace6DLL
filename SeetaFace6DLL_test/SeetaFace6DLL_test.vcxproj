@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="detect_faces.h" />
     <ClInclude Include="detect_face_landmarks.h" />
+    <ClInclude Include="recognize_face.h" />
     <ClInclude Include="SeetaFace6.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -24,6 +24,9 @@
     <ClInclude Include="detect_face_landmarks.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="recognize_face.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SeetaFace6.cpp">
@@ -33,6 +36,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="detect_face_landmarks.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="recognize_face.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
