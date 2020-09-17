@@ -13,7 +13,6 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
     // clarity quality
     DLLEXPORT void* create_clarity_quality_checker();
 
@@ -51,25 +50,11 @@ extern "C" {
 
     DLLEXPORT void estimate_face_pose(
         void* p_face_pose_estimator,
-        int img_h,
-        int img_w,
-        int img_c,
-        unsigned char* img_data,
-        int face_rect[4],
+        const SeetaImageData& image,
+        const SeetaRect& face_rect,
         float* yaw,
         float* pitch,
         float* roll);
-
-    //DLLEXPORT void estimate_face_pose(
-    //    void* p_face_pose_estimator,
-    //    int img_h,
-    //    int img_w,
-    //    int img_c,
-    //    unsigned char* img_data,
-    //    SeetaRect* seeta_rect,
-    //    float* yaw,
-    //    float* pitch,
-    //    float* roll);
 
     DLLEXPORT void destroy_face_pose_estimator(void* p_face_pose_estimator);
 

@@ -1,40 +1,42 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "SeetaFace6.h"
+#include "detect_face_landmarks.h"
+
+void test_landmark()
+{
+    const char* model_file_path = "./SeetaFaceSDK/models/face_landmarker_pts5.csta";
+    void* landmark_detector = create_landmark_detector(model_file_path);
+
+    //seeta::ModelSetting::Device device = seeta::ModelSetting::CPU;
+    //int id = 0;
+    //std::string landmark_model = "./SeetaFaceSDK/models/face_landmarker_pts5.csta";
+    //seeta::ModelSetting landmark_setting(landmark_model, device, id);
+    //seeta::FaceLandmarker* m_landmark = new seeta::FaceLandmarker(landmark_setting);
+
+    const char* image_path = "./data/126-1060-309-152-111_1_.png";
+    cv::Mat image = cv::imread(image_path);
+    std::cout << image.size() << std::endl;
+    SeetaImageData seeta_image = { int(image.cols), int(image.rows), int(image.channels()), image.data };
+    SeetaRect seeta_rect = { 0, 0, int(image.cols), int(image.rows) };
+    std::vector<SeetaPointF> points(5);
+    detect_face_landmarks(landmark_detector, seeta_image, seeta_rect, points.data());
+    //std::vector<SeetaPointF> points = m_landmark->mark(seeta_image, seeta_rect);
+
+    for (size_t i = 0; i < points.size(); ++i) {
+        std::cout << points[i].x << " " << points[i].y << std::endl;
+    }
+
+    //if (m_landmark) {
+    //    delete m_landmark;
+    //    m_landmark = nullptr;
+    //}
+
+    destroy_landmark_detector(landmark_detector);
+}
 
 int main()
 {
-    const char* query_img_path = ".\\data\\126-1060-309-152-111_1_.png";
-    cv::Mat image = cv::imread(query_img_path);
-    int face_rect[4] = { 0, 0, image.cols, image.rows };
-    double face_landmarks[10] = { 
-        33.8604, 50.8867, 70.4262, 56.923, 44.2245, 74.5922, 39.8662, 88.8391, 68.6998, 92.397 
-    };
-    int level = 0;
-    float score = 0;
-
-    void* p_clarity_quality_checker = create_clarity_quality_checker();
-    check_clarity_quality(
-        p_clarity_quality_checker, int(image.rows), int(image.cols), int(image.channels()),
-        image.data, face_rect, face_landmarks, &level, &score);
-    destroy_clarity_quality_checker(p_clarity_quality_checker);
-    std::cout << "clarity quality, level is: " << level << ", score is: " << score << std::endl;
-
-    void* p_pose_quality_checker = create_pose_quality_checker();
-    check_pose_quality(
-        p_pose_quality_checker, int(image.rows), int(image.cols), int(image.channels()),
-        image.data, face_rect, face_landmarks, &level, &score);
-    destroy_pose_quality_checker(p_pose_quality_checker);
-    std::cout << "pose quality, level is: " << level << ", score is: " << score << std::endl;
-
-    float yaw = 0, pitch = 0, roll = 0;
-    const char* p_pose_estimate_model = ".\\SeetaFaceSDK\\models\\pose_estimation.csta";
-    void* p_face_pose_estimator = create_face_pose_estimator(p_pose_estimate_model);
-    estimate_face_pose(p_face_pose_estimator, int(image.rows), int(image.cols), int(image.channels()),
-        image.data, face_rect, &yaw, &pitch, &roll);
-    destroy_face_pose_estimator(p_face_pose_estimator);
-    std::cout << "face angles, yaw: " << yaw << ", pitch: " << pitch << ", roll: " << roll << std::endl;
-
+    test_landmark();
     system("pause");
     return 0;
 }

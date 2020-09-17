@@ -20,6 +20,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="detect_face_landmarks.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="detect_faces.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="SeetaFace6.h">
       <Filter>头文件</Filter>
     </ClInclude>
